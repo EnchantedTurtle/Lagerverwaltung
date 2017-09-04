@@ -2,7 +2,7 @@
 
 ## Produkte
 
-- [ ] Produkt speichern:
+- [x] Produkt speichern:
 	Produkt wird mit Name, Kosten, Details, Kategorie und Anzahl in die DB eingespeichert
 
 - [ ] Benötigte Attribute sind nicht angegeben worden:
