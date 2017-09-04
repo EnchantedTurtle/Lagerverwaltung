@@ -30,43 +30,44 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Produkte = new System.Windows.Forms.TabPage();
+            this.textBox_ProduktDetails = new System.Windows.Forms.TextBox();
             this.button_ProduktEdit = new System.Windows.Forms.Button();
             this.button_ProduktDel = new System.Windows.Forms.Button();
             this.listBox_Produkt = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button_ProduktSave = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboBox_ProduktKategorien = new System.Windows.Forms.ComboBox();
+            this.numericUpDown_ProduktAnzahl = new System.Windows.Forms.NumericUpDown();
+            this.textBox_ProduktName = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.Kategorien = new System.Windows.Forms.TabPage();
+            this.textBox_KategorieName = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.button_ColorPicker = new System.Windows.Forms.Button();
             this.button_KategorEdit = new System.Windows.Forms.Button();
             this.button_KategorDel = new System.Windows.Forms.Button();
             this.listBox_Kategorien = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button_KategorSave = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.textBox_ProduktDetails = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.numericUpDown_ProduktKosten = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.Produkte.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.Kategorien.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ProduktAnzahl)).BeginInit();
+            this.textBox_KategorieName.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ProduktKosten)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.Produkte);
-            this.tabControl1.Controls.Add(this.Kategorien);
+            this.tabControl1.Controls.Add(this.textBox_KategorieName);
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -79,16 +80,16 @@
             // Produkte
             // 
             this.Produkte.BackColor = System.Drawing.Color.Khaki;
+            this.Produkte.Controls.Add(this.numericUpDown_ProduktKosten);
             this.Produkte.Controls.Add(this.textBox_ProduktDetails);
             this.Produkte.Controls.Add(this.button_ProduktEdit);
             this.Produkte.Controls.Add(this.button_ProduktDel);
             this.Produkte.Controls.Add(this.listBox_Produkt);
             this.Produkte.Controls.Add(this.label2);
             this.Produkte.Controls.Add(this.button_ProduktSave);
-            this.Produkte.Controls.Add(this.comboBox1);
-            this.Produkte.Controls.Add(this.numericUpDown1);
-            this.Produkte.Controls.Add(this.textBox2);
-            this.Produkte.Controls.Add(this.textBox1);
+            this.Produkte.Controls.Add(this.comboBox_ProduktKategorien);
+            this.Produkte.Controls.Add(this.numericUpDown_ProduktAnzahl);
+            this.Produkte.Controls.Add(this.textBox_ProduktName);
             this.Produkte.Controls.Add(this.label8);
             this.Produkte.Controls.Add(this.label7);
             this.Produkte.Controls.Add(this.label6);
@@ -101,6 +102,14 @@
             this.Produkte.TabIndex = 0;
             this.Produkte.Text = "Produkte";
             // 
+            // textBox_ProduktDetails
+            // 
+            this.textBox_ProduktDetails.Location = new System.Drawing.Point(209, 158);
+            this.textBox_ProduktDetails.Name = "textBox_ProduktDetails";
+            this.textBox_ProduktDetails.Size = new System.Drawing.Size(100, 20);
+            this.textBox_ProduktDetails.TabIndex = 29;
+            this.textBox_ProduktDetails.Text = "Details";
+            // 
             // button_ProduktEdit
             // 
             this.button_ProduktEdit.BackColor = System.Drawing.Color.Transparent;
@@ -110,6 +119,7 @@
             this.button_ProduktEdit.TabIndex = 28;
             this.button_ProduktEdit.Text = "Bearbeiten";
             this.button_ProduktEdit.UseVisualStyleBackColor = false;
+            this.button_ProduktEdit.Click += new System.EventHandler(this.button_ProduktEdit_Click);
             // 
             // button_ProduktDel
             // 
@@ -120,13 +130,14 @@
             this.button_ProduktDel.TabIndex = 27;
             this.button_ProduktDel.Text = "Entfernen";
             this.button_ProduktDel.UseVisualStyleBackColor = false;
+            this.button_ProduktDel.Click += new System.EventHandler(this.button_ProduktDel_Click);
             // 
             // listBox_Produkt
             // 
             this.listBox_Produkt.FormattingEnabled = true;
-            this.listBox_Produkt.Location = new System.Drawing.Point(455, 129);
+            this.listBox_Produkt.Location = new System.Drawing.Point(397, 129);
             this.listBox_Produkt.Name = "listBox_Produkt";
-            this.listBox_Produkt.Size = new System.Drawing.Size(120, 173);
+            this.listBox_Produkt.Size = new System.Drawing.Size(178, 212);
             this.listBox_Produkt.TabIndex = 26;
             // 
             // label2
@@ -147,38 +158,38 @@
             this.button_ProduktSave.TabIndex = 24;
             this.button_ProduktSave.Text = "Speichern";
             this.button_ProduktSave.UseVisualStyleBackColor = false;
+            this.button_ProduktSave.Click += new System.EventHandler(this.button_ProduktSave_Click);
             // 
-            // comboBox1
+            // comboBox_ProduktKategorien
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(209, 212);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 23;
-            this.comboBox1.Text = "Kategorien";
+            this.comboBox_ProduktKategorien.FormattingEnabled = true;
+            this.comboBox_ProduktKategorien.Location = new System.Drawing.Point(209, 212);
+            this.comboBox_ProduktKategorien.Name = "comboBox_ProduktKategorien";
+            this.comboBox_ProduktKategorien.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_ProduktKategorien.TabIndex = 23;
+            this.comboBox_ProduktKategorien.Text = "Kategorien";
             // 
-            // numericUpDown1
+            // numericUpDown_ProduktAnzahl
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(209, 243);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDown1.TabIndex = 22;
+            this.numericUpDown_ProduktAnzahl.BackColor = System.Drawing.Color.White;
+            this.numericUpDown_ProduktAnzahl.ForeColor = System.Drawing.Color.Black;
+            this.numericUpDown_ProduktAnzahl.Location = new System.Drawing.Point(209, 243);
+            this.numericUpDown_ProduktAnzahl.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_ProduktAnzahl.Name = "numericUpDown_ProduktAnzahl";
+            this.numericUpDown_ProduktAnzahl.Size = new System.Drawing.Size(100, 20);
+            this.numericUpDown_ProduktAnzahl.TabIndex = 22;
             // 
-            // textBox2
+            // textBox_ProduktName
             // 
-            this.textBox2.Location = new System.Drawing.Point(209, 116);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 18;
-            this.textBox2.Text = "Preis";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(209, 84);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 17;
-            this.textBox1.Text = "Name";
+            this.textBox_ProduktName.Location = new System.Drawing.Point(209, 73);
+            this.textBox_ProduktName.Name = "textBox_ProduktName";
+            this.textBox_ProduktName.Size = new System.Drawing.Size(100, 20);
+            this.textBox_ProduktName.TabIndex = 17;
+            this.textBox_ProduktName.Text = "Name";
             // 
             // label8
             // 
@@ -219,31 +230,40 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 84);
+            this.label1.Location = new System.Drawing.Point(44, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Name des Produktes *";
             // 
-            // Kategorien
+            // textBox_KategorieName
             // 
-            this.Kategorien.BackColor = System.Drawing.Color.Khaki;
-            this.Kategorien.Controls.Add(this.label10);
-            this.Kategorien.Controls.Add(this.button_ColorPicker);
-            this.Kategorien.Controls.Add(this.button_KategorEdit);
-            this.Kategorien.Controls.Add(this.button_KategorDel);
-            this.Kategorien.Controls.Add(this.listBox_Kategorien);
-            this.Kategorien.Controls.Add(this.label3);
-            this.Kategorien.Controls.Add(this.textBox4);
-            this.Kategorien.Controls.Add(this.label9);
-            this.Kategorien.Controls.Add(this.label4);
-            this.Kategorien.Controls.Add(this.button_KategorSave);
-            this.Kategorien.Location = new System.Drawing.Point(4, 22);
-            this.Kategorien.Name = "Kategorien";
-            this.Kategorien.Padding = new System.Windows.Forms.Padding(3);
-            this.Kategorien.Size = new System.Drawing.Size(754, 395);
-            this.Kategorien.TabIndex = 1;
-            this.Kategorien.Text = "Kategorien";
+            this.textBox_KategorieName.BackColor = System.Drawing.Color.Khaki;
+            this.textBox_KategorieName.Controls.Add(this.label10);
+            this.textBox_KategorieName.Controls.Add(this.button_ColorPicker);
+            this.textBox_KategorieName.Controls.Add(this.button_KategorEdit);
+            this.textBox_KategorieName.Controls.Add(this.button_KategorDel);
+            this.textBox_KategorieName.Controls.Add(this.listBox_Kategorien);
+            this.textBox_KategorieName.Controls.Add(this.label3);
+            this.textBox_KategorieName.Controls.Add(this.textBox4);
+            this.textBox_KategorieName.Controls.Add(this.label9);
+            this.textBox_KategorieName.Controls.Add(this.label4);
+            this.textBox_KategorieName.Controls.Add(this.button_KategorSave);
+            this.textBox_KategorieName.Location = new System.Drawing.Point(4, 22);
+            this.textBox_KategorieName.Name = "textBox_KategorieName";
+            this.textBox_KategorieName.Padding = new System.Windows.Forms.Padding(3);
+            this.textBox_KategorieName.Size = new System.Drawing.Size(754, 395);
+            this.textBox_KategorieName.TabIndex = 1;
+            this.textBox_KategorieName.Text = "Kategorien";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(487, 79);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(70, 13);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Kategorieliste";
             // 
             // button_ColorPicker
             // 
@@ -297,6 +317,15 @@
             this.textBox4.TabIndex = 11;
             this.textBox4.Text = "Kategoriename";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(31, 103);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(108, 13);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "Name der Kategorie *";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -315,31 +344,19 @@
             this.button_KategorSave.Text = "Speichern";
             this.button_KategorSave.UseVisualStyleBackColor = true;
             // 
-            // textBox_ProduktDetails
+            // numericUpDown_ProduktKosten
             // 
-            this.textBox_ProduktDetails.Location = new System.Drawing.Point(209, 158);
-            this.textBox_ProduktDetails.Name = "textBox_ProduktDetails";
-            this.textBox_ProduktDetails.Size = new System.Drawing.Size(100, 20);
-            this.textBox_ProduktDetails.TabIndex = 29;
-            this.textBox_ProduktDetails.Text = "Details";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(31, 103);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(108, 13);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "Name der Kategorie *";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(487, 79);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(70, 13);
-            this.label10.TabIndex = 35;
-            this.label10.Text = "Kategorieliste";
+            this.numericUpDown_ProduktKosten.BackColor = System.Drawing.Color.White;
+            this.numericUpDown_ProduktKosten.ForeColor = System.Drawing.Color.Black;
+            this.numericUpDown_ProduktKosten.Location = new System.Drawing.Point(209, 109);
+            this.numericUpDown_ProduktKosten.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_ProduktKosten.Name = "numericUpDown_ProduktKosten";
+            this.numericUpDown_ProduktKosten.Size = new System.Drawing.Size(100, 20);
+            this.numericUpDown_ProduktKosten.TabIndex = 30;
             // 
             // Form1
             // 
@@ -353,9 +370,10 @@
             this.tabControl1.ResumeLayout(false);
             this.Produkte.ResumeLayout(false);
             this.Produkte.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.Kategorien.ResumeLayout(false);
-            this.Kategorien.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ProduktAnzahl)).EndInit();
+            this.textBox_KategorieName.ResumeLayout(false);
+            this.textBox_KategorieName.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ProduktKosten)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -364,16 +382,15 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage Produkte;
-        private System.Windows.Forms.TabPage Kategorien;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TabPage textBox_KategorieName;
+        private System.Windows.Forms.TextBox textBox_ProduktName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox comboBox_ProduktKategorien;
+        private System.Windows.Forms.NumericUpDown numericUpDown_ProduktAnzahl;
         private System.Windows.Forms.Button button_ProduktEdit;
         private System.Windows.Forms.Button button_ProduktDel;
         private System.Windows.Forms.ListBox listBox_Produkt;
@@ -391,6 +408,7 @@
         private System.Windows.Forms.TextBox textBox_ProduktDetails;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown numericUpDown_ProduktKosten;
     }
 }
 

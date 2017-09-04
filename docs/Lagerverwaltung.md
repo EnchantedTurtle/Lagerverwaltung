@@ -2,8 +2,8 @@
 
 ## Produkte
 
-- [ ] Produkt speichern:
-	Produkt wird mit Name, Kosten, Details, Kategorie und Anzahl in die DB eingespeichert
+- [x] Produkt speichern:
+	Produkt wird mit Name, Kosten, Details, Kategorie und Anzahl in die (DB) eingespeichert
 
 - [ ] Benötigte Attribute sind nicht angegeben worden:
 	Messagefenster weißt auf die benötigten Attribute hin (Name, kosten, Kategorie, Anzahl), zudem werden Textfelder der fehlenden attribute eingefärbt
@@ -13,7 +13,7 @@
 	Entweder Löschung des vorhandenen Produkts oder anderer Name.
 	Produkte dürfen in allen Attributen außer dem Namen identisch sein.
 
-- [ ] Produkte entfernen: 
+- [x] Produkte entfernen: 
 	Produkt wird aus der Produktliste und aus der DB entfernt.
 
 - [ ] Kategorie nicht vorhanden
