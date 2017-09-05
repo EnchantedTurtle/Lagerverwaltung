@@ -31,7 +31,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Produkte = new System.Windows.Forms.TabPage();
             this.button_reinigen = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
             this.numericUpDown_ProduktKosten = new System.Windows.Forms.NumericUpDown();
             this.textBox_ProduktDetails = new System.Windows.Forms.TextBox();
             this.button_ProduktEdit = new System.Windows.Forms.Button();
@@ -48,18 +47,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_Kategorie = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox_KategorieName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.button_ColorPicker = new System.Windows.Forms.Button();
             this.button_KategorEdit = new System.Windows.Forms.Button();
             this.button_KategorDel = new System.Windows.Forms.Button();
             this.listBox_Kategorien = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.button_KategorSave = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabControl1.SuspendLayout();
@@ -86,7 +82,6 @@
             // 
             this.Produkte.BackColor = System.Drawing.Color.Khaki;
             this.Produkte.Controls.Add(this.button_reinigen);
-            this.Produkte.Controls.Add(this.label11);
             this.Produkte.Controls.Add(this.numericUpDown_ProduktKosten);
             this.Produkte.Controls.Add(this.textBox_ProduktDetails);
             this.Produkte.Controls.Add(this.button_ProduktEdit);
@@ -118,14 +113,6 @@
             this.button_reinigen.Text = "Reinigen";
             this.button_reinigen.UseVisualStyleBackColor = true;
             this.button_reinigen.Click += new System.EventHandler(this.button_reinigen_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(47, 288);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(0, 13);
-            this.label11.TabIndex = 31;
             // 
             // numericUpDown_ProduktKosten
             // 
@@ -279,18 +266,15 @@
             // textBox_Kategorie
             // 
             this.textBox_Kategorie.BackColor = System.Drawing.Color.Khaki;
-            this.textBox_Kategorie.Controls.Add(this.label12);
             this.textBox_Kategorie.Controls.Add(this.button1);
             this.textBox_Kategorie.Controls.Add(this.textBox_KategorieName);
             this.textBox_Kategorie.Controls.Add(this.label10);
-            this.textBox_Kategorie.Controls.Add(this.button_ColorPicker);
             this.textBox_Kategorie.Controls.Add(this.button_KategorEdit);
             this.textBox_Kategorie.Controls.Add(this.button_KategorDel);
             this.textBox_Kategorie.Controls.Add(this.listBox_Kategorien);
             this.textBox_Kategorie.Controls.Add(this.label3);
             this.textBox_Kategorie.Controls.Add(this.textBox4);
             this.textBox_Kategorie.Controls.Add(this.label9);
-            this.textBox_Kategorie.Controls.Add(this.label4);
             this.textBox_Kategorie.Controls.Add(this.button_KategorSave);
             this.textBox_Kategorie.Location = new System.Drawing.Point(4, 22);
             this.textBox_Kategorie.Name = "textBox_Kategorie";
@@ -298,14 +282,6 @@
             this.textBox_Kategorie.Size = new System.Drawing.Size(754, 395);
             this.textBox_Kategorie.TabIndex = 1;
             this.textBox_Kategorie.Text = "Kategorien";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(31, 338);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(0, 13);
-            this.label12.TabIndex = 39;
             // 
             // button1
             // 
@@ -332,15 +308,6 @@
             this.label10.Size = new System.Drawing.Size(70, 13);
             this.label10.TabIndex = 35;
             this.label10.Text = "Kategorieliste";
-            // 
-            // button_ColorPicker
-            // 
-            this.button_ColorPicker.Location = new System.Drawing.Point(179, 153);
-            this.button_ColorPicker.Name = "button_ColorPicker";
-            this.button_ColorPicker.Size = new System.Drawing.Size(75, 23);
-            this.button_ColorPicker.TabIndex = 33;
-            this.button_ColorPicker.UseVisualStyleBackColor = true;
-            this.button_ColorPicker.Click += new System.EventHandler(this.button_ColorPicker_Click);
             // 
             // button_KategorEdit
             // 
@@ -398,15 +365,6 @@
             this.label9.TabIndex = 10;
             this.label9.Text = "Name der Kategorie *";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 158);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Farbe";
-            // 
             // button_KategorSave
             // 
             this.button_KategorSave.Location = new System.Drawing.Point(31, 213);
@@ -456,13 +414,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_ProduktSave;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button_KategorSave;
         private System.Windows.Forms.Button button_KategorEdit;
         private System.Windows.Forms.Button button_KategorDel;
         private System.Windows.Forms.ListBox listBox_Kategorien;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button_ColorPicker;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.TextBox textBox_ProduktDetails;
         private System.Windows.Forms.Label label10;
@@ -470,9 +426,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_ProduktKosten;
         private System.Windows.Forms.Button button_reinigen;
         private System.Windows.Forms.TextBox textBox_KategorieName;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label12;
     }
 }
 

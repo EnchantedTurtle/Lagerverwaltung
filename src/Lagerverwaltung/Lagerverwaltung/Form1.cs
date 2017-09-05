@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
-using System.Xml.Schema;
 
 namespace Lagerverwaltung
 {
+    [SuppressMessage("ReSharper", "LocalizableElement")]
+    [SuppressMessage("ReSharper", "ForCanBeConvertedToForeach")]
     public partial class Form1 : Form
     {
         public Form1()
@@ -20,19 +21,12 @@ namespace Lagerverwaltung
             listBox_Kategorien.DisplayMember = "Name";
             comboBox_ProduktKategorien.DisplayMember = "Name";
 
+            listBox_Produkt.ValueMember = " Id";
+            listBox_Kategorien.ValueMember = "Id";
+            comboBox_ProduktKategorien.ValueMember = "Id";
+
         }
-
-        private void button_ColorPicker_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = (Button) sender;
-
-            DialogResult result = colorDialog1.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                clickedButton.BackColor = colorDialog1.Color;
-            }
-        }
+        
 
         private void button_ProduktSave_Click(object sender, EventArgs e)
         {
@@ -43,21 +37,20 @@ namespace Lagerverwaltung
                 Produkt produkt = new Produkt(textBox_ProduktName.Text,
                     Convert.ToInt32(numericUpDown_ProduktAnzahl.Value),
                     Convert.ToInt32(numericUpDown_ProduktKosten.Value), comboBox_ProduktKategorien.GetItemText(comboBox_ProduktKategorien.SelectedItem),
-                    textBox_ProduktDetails.Text, Guid.NewGuid().ToString());
+                    textBox_ProduktDetails.Text);
 
-                foreach (Produkt prod in Program.ProduktListe)
+                foreach (Produkt prod in Program.Produkte)
                 {
                     if (prod.Name.Equals(produkt.Name))
                     {
-                        textBox_ProduktName.BackColor = Color.Red;
+                        MessageBox.Show("Dieser Name wird bereits benutzt");
                         isUsed = true;
                     }
                 }
                 if (!isUsed)
                 {
-                    Program.ProduktListe.Add(produkt);
-                    listBox_Produkt.DataSource = Program.ProduktListe;
-                    textBox_ProduktName.BackColor = Color.White;
+                    Program.Produkte.Add(produkt);
+                    listBox_Produkt.DataSource = Program.Produkte;
                     ClearInputProd();
                 }
             }
@@ -68,14 +61,14 @@ namespace Lagerverwaltung
 
             String selectedProductName = listBox_Produkt.GetItemText(listBox_Produkt.SelectedItem);
 
-            for (var i = 0; i < Program.ProduktListe.Count; i++)
+            for (var i = 0; i < Program.Produkte.Count; i++)
             {
-                Produkt produkt = Program.ProduktListe[i];
+                Produkt produkt = Program.Produkte[i];
 
 
                 if (selectedProductName.Equals(produkt.Name))
                 {
-                    Program.ProduktListe.Remove(Program.ProduktListe[i]);
+                    Program.Produkte.Remove(Program.Produkte[i]);
                 }
             }
             
@@ -83,22 +76,20 @@ namespace Lagerverwaltung
 
         private void button_ProduktEdit_Click(object sender, EventArgs e)
         {
-            for (var i = 0; i < Program.ProduktListe.Count; i++)
+            for (var i = 0; i < Program.Produkte.Count; i++)
             {
-                Produkt produkt = Program.ProduktListe[i];
+                Produkt produkt = Program.Produkte[i];
 
-                String id = produkt.Id;
-
-                if (label11.Text.Equals(id))
-                {
+                if(listBox_Produkt.SelectedValue.ToString().Equals(produkt.Id))
+                 {
                     produkt.Name = textBox_ProduktName.Text;
                     produkt.Kosten = Convert.ToInt32(numericUpDown_ProduktKosten.Value);
                     produkt.Details = textBox_ProduktDetails.Text;
                     produkt.Kategorie = comboBox_ProduktKategorien.GetItemText(comboBox_ProduktKategorien.SelectedItem);
                     produkt.Anzahl = Convert.ToInt32(numericUpDown_ProduktAnzahl.Value);
 
-                    Program.ProduktListe.Remove(produkt);
-                    Program.ProduktListe.Add(produkt);
+                    Program.Produkte.Remove(produkt);
+                    Program.Produkte.Add(produkt);
                 }
             }
         }
@@ -110,22 +101,18 @@ namespace Lagerverwaltung
             textBox_ProduktDetails.Text = "";
             comboBox_ProduktKategorien.SelectedText = "";
             numericUpDown_ProduktAnzahl.Value = 0;
-            label11.Text = "";
         }
 
         private void ClearInputKat()
         {
             textBox_KategorieName.Text = "";
-            button_ColorPicker.BackColor = Color.LightGray;
-            textBox_KategorieName.BackColor = Color.White;
-            label12.Text = "";
         }
 
         private void listBox_Produkt_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (var i = 0; i < Program.ProduktListe.Count; i++)
+            for (var i = 0; i < Program.Produkte.Count; i++)
             {
-                Produkt produkt = Program.ProduktListe[i];
+                Produkt produkt = Program.Produkte[i];
 
                 String proName = listBox_Produkt.GetItemText(listBox_Produkt.SelectedItem);
 
@@ -136,7 +123,6 @@ namespace Lagerverwaltung
                     textBox_ProduktDetails.Text = produkt.Details;
                     comboBox_ProduktKategorien.Text = produkt.Kategorie;
                     numericUpDown_ProduktAnzahl.Text = produkt.Anzahl.ToString();
-                    label11.Text = produkt.Id;
                 }
             }
         }
@@ -153,22 +139,22 @@ namespace Lagerverwaltung
 
             if (TestForEmptyKat())
             {
-                Kategorie kategorie = new Kategorie(textBox_KategorieName.Text,Guid.NewGuid().ToString());
 
-                foreach (Kategorie kat in Program.Kategorieliste)
+                foreach (Kategorie kat in Program.Kategorien)
                 {
-                    if (kat.Name.Equals(kategorie.Name))
+                    if (kat.Name.Equals(textBox_KategorieName.Text))
                     {
-                        textBox_KategorieName.BackColor = Color.Red;
+                        MessageBox.Show("Dieser Name wird bereits genutzt");
                         isUsed = true;
                     }
                 }
                 if (!isUsed)
                 {
-                    Program.Kategorieliste.Add(kategorie);
-                    listBox_Kategorien.DataSource = Program.Kategorieliste;
-                    comboBox_ProduktKategorien.DataSource = Program.Kategorieliste;
-                    textBox_KategorieName.BackColor = Color.White;
+
+                    Kategorie kategorie = new Kategorie(textBox_KategorieName.Text);
+                    Program.Kategorien.Add(kategorie);
+                    listBox_Kategorien.DataSource = Program.Kategorien;
+                    comboBox_ProduktKategorien.DataSource = Program.Kategorien;
                     ClearInputKat();
                 }
 
@@ -186,9 +172,9 @@ namespace Lagerverwaltung
 
 
 
-            for (var i = 0; i < Program.ProduktListe.Count; i++)
+            for (var i = 0; i < Program.Produkte.Count; i++)
             {
-                var product = Program.ProduktListe[i];
+                var product = Program.Produkte[i];
                 if (product.Kategorie.Equals(selectedKategorieName))
                 {
                     MessageBox.Show("Es sind Produkte dieser Kategorie zugeordnet");
@@ -197,13 +183,13 @@ namespace Lagerverwaltung
             }
 
 
-            for (var i = 0; i < Program.Kategorieliste.Count; i++)
+            for (var i = 0; i < Program.Kategorien.Count; i++)
             {
-                Kategorie kategorie = Program.Kategorieliste[i];
+                Kategorie kategorie = Program.Kategorien[i];
                
                     if (selectedKategorieName.Equals(kategorie.Name))
                     {
-                        Program.Kategorieliste.Remove(Program.Kategorieliste[i]);
+                        Program.Kategorien.Remove(Program.Kategorien[i]);
                         return;
                     }
                 
@@ -214,34 +200,31 @@ namespace Lagerverwaltung
 
         private void button_KategorEdit_Click(object sender, EventArgs e)
         {
-            for (var i = 0; i < Program.Kategorieliste.Count; i++)
+            for (var i = 0; i < Program.Kategorien.Count; i++)
             {
-                Kategorie kategorie = Program.Kategorieliste[i];
+                Kategorie kategorie = Program.Kategorien[i];
 
-                String id = kategorie.Id;
-
-                if (label12.Text.Equals(id))
+                if (listBox_Kategorien.SelectedValue.ToString().Equals(kategorie.Id))
                 {
                     kategorie.Name = textBox_KategorieName.Text;
 
-                    Program.Kategorieliste.Remove(kategorie);
-                    Program.Kategorieliste.Add(kategorie);
+                    Program.Kategorien.Remove(kategorie);
+                    Program.Kategorien.Add(kategorie);
                 }
             }
         }
 
         private void listBox_Kategorien_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (var i = 0; i < Program.Kategorieliste.Count; i++)
+            for (var i = 0; i < Program.Kategorien.Count; i++)
             {
-                Kategorie kategorie = Program.Kategorieliste[i];
+                Kategorie kategorie = Program.Kategorien[i];
 
                 String katname = listBox_Kategorien.GetItemText(listBox_Kategorien.SelectedItem);
 
                 if (katname.Equals(kategorie.Name))
                 {
                     textBox_KategorieName.Text = kategorie.Name;
-                    label12.Text = kategorie.Id;
                 }
             }
         }
@@ -253,25 +236,22 @@ namespace Lagerverwaltung
                 MessageBox.Show("Der Name darf nicht leer sein");
                 return false;
             }
-            else if (!(numericUpDown_ProduktKosten.Value >= 0))
+            if (numericUpDown_ProduktKosten.Value <= 0)
             {
-                MessageBox.Show("Die Anzahl muss größer als 0 sein");
+                MessageBox.Show("Die Kosten muss größer als 0 sein");
                 return false;
             }
-            else if (String.IsNullOrWhiteSpace(comboBox_ProduktKategorien.GetItemText(comboBox_ProduktKategorien.SelectedItem)))
+            if (String.IsNullOrWhiteSpace(comboBox_ProduktKategorien.GetItemText(comboBox_ProduktKategorien.SelectedItem)))
             {
                 MessageBox.Show("Es muss eine Kategorie gewählt werden");
                 return false;
             }
-            else if (numericUpDown_ProduktAnzahl.Value <= 0)
+            if (numericUpDown_ProduktAnzahl.Value <= 0)
             {
-                MessageBox.Show("Das Produkt darf nicht kostenlos sein");
+                MessageBox.Show("Die Anzahl darf nicht kostenlos sein");
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
         public bool TestForEmptyKat()

@@ -1,16 +1,21 @@
 ﻿using System;
+
 namespace Lagerverwaltung
 {
     class Kategorie
     {
         public String Name { get; set; }
-        public String Farbe { get; set; }
         public String Id { get; set; }
 
-        public Kategorie(String name, String id)
+        public Kategorie(String name)
         {
             this.Name = name;
-            this.Id = id
+            this.Id = Guid.NewGuid().ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.Id;
         }
     }
 }

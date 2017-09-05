@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Lagerverwaltung
 {
@@ -9,7 +8,6 @@ namespace Lagerverwaltung
         public int Anzahl { get; set; }
         public int Kosten { get; set; }
         public String Kategorie { get; set; }
-        public String Farbe { get; set; }
         public String Details { get; set; }
         public String Id { get; set; }
 
@@ -18,14 +16,19 @@ namespace Lagerverwaltung
             
         }
 
-        public Produkt(String name, int anzahl, int kosten, String kategorie, String details, String id)
+        public Produkt(String name, int anzahl, int kosten, String kategorie, String details)
         {
             this.Name = name;
             this.Anzahl = anzahl;
             this.Kosten = kosten;
             this.Kategorie = kategorie;
             this.Details = details;
-            this.Id = id;
+            this.Id = Guid.NewGuid().ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.Id;
         }
     }
 
