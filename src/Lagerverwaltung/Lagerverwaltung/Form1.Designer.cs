@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Produkte = new System.Windows.Forms.TabPage();
+            this.numericUpDown_ProduktKosten = new System.Windows.Forms.NumericUpDown();
             this.textBox_ProduktDetails = new System.Windows.Forms.TextBox();
             this.button_ProduktEdit = new System.Windows.Forms.Button();
             this.button_ProduktDel = new System.Windows.Forms.Button();
@@ -56,12 +57,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button_KategorSave = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.numericUpDown_ProduktKosten = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.button_reinigen = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Produkte.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ProduktKosten)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ProduktAnzahl)).BeginInit();
             this.textBox_KategorieName.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ProduktKosten)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -80,6 +82,8 @@
             // Produkte
             // 
             this.Produkte.BackColor = System.Drawing.Color.Khaki;
+            this.Produkte.Controls.Add(this.button_reinigen);
+            this.Produkte.Controls.Add(this.label11);
             this.Produkte.Controls.Add(this.numericUpDown_ProduktKosten);
             this.Produkte.Controls.Add(this.textBox_ProduktDetails);
             this.Produkte.Controls.Add(this.button_ProduktEdit);
@@ -101,6 +105,20 @@
             this.Produkte.Size = new System.Drawing.Size(754, 395);
             this.Produkte.TabIndex = 0;
             this.Produkte.Text = "Produkte";
+            // 
+            // numericUpDown_ProduktKosten
+            // 
+            this.numericUpDown_ProduktKosten.BackColor = System.Drawing.Color.White;
+            this.numericUpDown_ProduktKosten.ForeColor = System.Drawing.Color.Black;
+            this.numericUpDown_ProduktKosten.Location = new System.Drawing.Point(209, 109);
+            this.numericUpDown_ProduktKosten.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_ProduktKosten.Name = "numericUpDown_ProduktKosten";
+            this.numericUpDown_ProduktKosten.Size = new System.Drawing.Size(100, 20);
+            this.numericUpDown_ProduktKosten.TabIndex = 30;
             // 
             // textBox_ProduktDetails
             // 
@@ -139,6 +157,7 @@
             this.listBox_Produkt.Name = "listBox_Produkt";
             this.listBox_Produkt.Size = new System.Drawing.Size(178, 212);
             this.listBox_Produkt.TabIndex = 26;
+            this.listBox_Produkt.SelectedIndexChanged += new System.EventHandler(this.listBox_Produkt_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -162,12 +181,13 @@
             // 
             // comboBox_ProduktKategorien
             // 
+            this.comboBox_ProduktKategorien.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_ProduktKategorien.FormattingEnabled = true;
             this.comboBox_ProduktKategorien.Location = new System.Drawing.Point(209, 212);
             this.comboBox_ProduktKategorien.Name = "comboBox_ProduktKategorien";
             this.comboBox_ProduktKategorien.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_ProduktKategorien.Sorted = true;
             this.comboBox_ProduktKategorien.TabIndex = 23;
-            this.comboBox_ProduktKategorien.Text = "Kategorien";
             // 
             // numericUpDown_ProduktAnzahl
             // 
@@ -344,19 +364,24 @@
             this.button_KategorSave.Text = "Speichern";
             this.button_KategorSave.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown_ProduktKosten
+            // label11
             // 
-            this.numericUpDown_ProduktKosten.BackColor = System.Drawing.Color.White;
-            this.numericUpDown_ProduktKosten.ForeColor = System.Drawing.Color.Black;
-            this.numericUpDown_ProduktKosten.Location = new System.Drawing.Point(209, 109);
-            this.numericUpDown_ProduktKosten.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.numericUpDown_ProduktKosten.Name = "numericUpDown_ProduktKosten";
-            this.numericUpDown_ProduktKosten.Size = new System.Drawing.Size(100, 20);
-            this.numericUpDown_ProduktKosten.TabIndex = 30;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(47, 288);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(15, 13);
+            this.label11.TabIndex = 31;
+            this.label11.Text = "id";
+            // 
+            // button_reinigen
+            // 
+            this.button_reinigen.Location = new System.Drawing.Point(128, 324);
+            this.button_reinigen.Name = "button_reinigen";
+            this.button_reinigen.Size = new System.Drawing.Size(75, 23);
+            this.button_reinigen.TabIndex = 32;
+            this.button_reinigen.Text = "Reinigen";
+            this.button_reinigen.UseVisualStyleBackColor = true;
+            this.button_reinigen.Click += new System.EventHandler(this.button_reinigen_Click);
             // 
             // Form1
             // 
@@ -370,10 +395,10 @@
             this.tabControl1.ResumeLayout(false);
             this.Produkte.ResumeLayout(false);
             this.Produkte.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ProduktKosten)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ProduktAnzahl)).EndInit();
             this.textBox_KategorieName.ResumeLayout(false);
             this.textBox_KategorieName.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ProduktKosten)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -409,6 +434,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown numericUpDown_ProduktKosten;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button_reinigen;
     }
 }
 

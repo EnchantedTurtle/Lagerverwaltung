@@ -5,10 +5,10 @@
 - [x] Produkt speichern:
 	Produkt wird mit Name, Kosten, Details, Kategorie und Anzahl in die (DB) eingespeichert
 
-- [ ] Benötigte Attribute sind nicht angegeben worden:
+- [x] Benötigte Attribute sind nicht angegeben worden:
 	Messagefenster weißt auf die benötigten Attribute hin (Name, kosten, Kategorie, Anzahl), zudem werden Textfelder der fehlenden attribute eingefärbt
 
-- [ ] Produktname ist bereits vorhanden:
+- [x] Produktname ist bereits vorhanden:
 	Messagefenster weißt darauf hin das es bereits ein Produkt mit dem eingegebenen Namen gibt. 
 	Entweder Löschung des vorhandenen Produkts oder anderer Name.
 	Produkte dürfen in allen Attributen außer dem Namen identisch sein.
@@ -19,7 +19,7 @@
 - [ ] Kategorie nicht vorhanden
 	Falls kategorie aufgrund eines Netzwerkfehlers nicht richtig aus der DB ausgelesen wurde wird Produktliste aktualisiert
 
-- [ ] Produkt bearbeiten:
+- [x] Produkt bearbeiten:
 	Produkt wird in der vorhandenen Maske zur hinzufügung eines Produktes eingesetzt.
 
 ## Kategorien
