@@ -30,18 +30,15 @@
 - [x] Kategorie speichern:
 	Kategorie wird mit Name und Farbe in DB eingespeichert
 
-- [ ] Kein Kategoriename
+- [x] Kein Kategoriename
 	Eingabeaufforderung für Kategoriename wird angezeigt
 
 - [x] Kategorie entfernen:
 	Kategorie wird aus DB entfernt
 	
-- [ ] Produkte sind dieser Kategorie zugeordnet
+- [x] Produkte sind dieser Kategorie zugeordnet
 	Fenster mit Hinweis darauf das noch Produkte mit dieser Kategorie versehen sind
 	Kategorien müssen leer sein um sie löschen zu können
 	
 - [x] Kategorie bearbeiten:
 	Nur Name und Farbe der Kategorie ist bearbeitbar
-
-- [ ] Farbe wird für Kategorie aktiviert:
-	Kategorie wird mit Farbe in die DB eingespeichert

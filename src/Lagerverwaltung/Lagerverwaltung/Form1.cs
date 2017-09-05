@@ -42,7 +42,7 @@ namespace Lagerverwaltung
             {
                 Produkt produkt = new Produkt(textBox_ProduktName.Text,
                     Convert.ToInt32(numericUpDown_ProduktAnzahl.Value),
-                    Convert.ToInt32(numericUpDown_ProduktKosten.Value), comboBox_ProduktKategorien.SelectedText,
+                    Convert.ToInt32(numericUpDown_ProduktKosten.Value), comboBox_ProduktKategorien.GetItemText(comboBox_ProduktKategorien.SelectedItem),
                     textBox_ProduktDetails.Text, Guid.NewGuid().ToString());
 
                 foreach (Produkt prod in Program.ProduktListe)
@@ -94,7 +94,7 @@ namespace Lagerverwaltung
                     produkt.Name = textBox_ProduktName.Text;
                     produkt.Kosten = Convert.ToInt32(numericUpDown_ProduktKosten.Value);
                     produkt.Details = textBox_ProduktDetails.Text;
-                    produkt.Kategorie = comboBox_ProduktKategorien.Text;
+                    produkt.Kategorie = comboBox_ProduktKategorien.GetItemText(comboBox_ProduktKategorien.SelectedItem);
                     produkt.Anzahl = Convert.ToInt32(numericUpDown_ProduktAnzahl.Value);
 
                     Program.ProduktListe.Remove(produkt);
@@ -108,7 +108,7 @@ namespace Lagerverwaltung
             textBox_ProduktName.Text = "";
             numericUpDown_ProduktKosten.Value = 0;
             textBox_ProduktDetails.Text = "";
-            comboBox_ProduktKategorien.Text = "";
+            comboBox_ProduktKategorien.SelectedText = "";
             numericUpDown_ProduktAnzahl.Value = 0;
             label11.Text = "";
         }
@@ -184,16 +184,32 @@ namespace Lagerverwaltung
         {
             String selectedKategorieName = listBox_Kategorien.GetItemText(listBox_Kategorien.SelectedItem);
 
+
+
+            for (var i = 0; i < Program.ProduktListe.Count; i++)
+            {
+                var product = Program.ProduktListe[i];
+                if (product.Kategorie.Equals(selectedKategorieName))
+                {
+                    MessageBox.Show("Es sind Produkte dieser Kategorie zugeordnet");
+                    return;
+                }
+            }
+
+
             for (var i = 0; i < Program.Kategorieliste.Count; i++)
             {
                 Kategorie kategorie = Program.Kategorieliste[i];
-
-
-                if (selectedKategorieName.Equals(kategorie.Name))
-                {
-                    Program.Kategorieliste.Remove(Program.Kategorieliste[i]);
-                }
+               
+                    if (selectedKategorieName.Equals(kategorie.Name))
+                    {
+                        Program.Kategorieliste.Remove(Program.Kategorieliste[i]);
+                        return;
+                    }
+                
             }
+
+
         }
 
         private void button_KategorEdit_Click(object sender, EventArgs e)
@@ -225,6 +241,7 @@ namespace Lagerverwaltung
                 if (katname.Equals(kategorie.Name))
                 {
                     textBox_KategorieName.Text = kategorie.Name;
+                    label12.Text = kategorie.Id;
                 }
             }
         }
@@ -236,17 +253,17 @@ namespace Lagerverwaltung
                 MessageBox.Show("Der Name darf nicht leer sein");
                 return false;
             }
-            else if (!(numericUpDown_ProduktKosten.Value <= 0))
+            else if (!(numericUpDown_ProduktKosten.Value >= 0))
             {
                 MessageBox.Show("Die Anzahl muss größer als 0 sein");
                 return false;
             }
-            else if (String.IsNullOrWhiteSpace(comboBox_ProduktKategorien.SelectedText))
+            else if (String.IsNullOrWhiteSpace(comboBox_ProduktKategorien.GetItemText(comboBox_ProduktKategorien.SelectedItem)))
             {
                 MessageBox.Show("Es muss eine Kategorie gewählt werden");
                 return false;
             }
-            else if (!(numericUpDown_ProduktAnzahl.Value <= 0))
+            else if (numericUpDown_ProduktAnzahl.Value <= 0)
             {
                 MessageBox.Show("Das Produkt darf nicht kostenlos sein");
                 return false;
@@ -266,5 +283,6 @@ namespace Lagerverwaltung
             }
                 return true;
         }
+
     }
 }

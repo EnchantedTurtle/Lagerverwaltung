@@ -10,7 +10,7 @@ namespace Lagerverwaltung
         public Kategorie(String name, String id)
         {
             this.Name = name;
-            this.Id = id;
+            this.Id = id
         }
     }
 }
