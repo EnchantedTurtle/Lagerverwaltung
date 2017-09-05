@@ -16,7 +16,7 @@
 - [x] Produkte entfernen: 
 	Produkt wird aus der Produktliste und aus der DB entfernt.
 
-- [ ] Kategorie nicht vorhanden
+- [x] Kategorie nicht vorhanden
 	Falls kategorie aufgrund eines Netzwerkfehlers nicht richtig aus der DB ausgelesen wurde wird Produktliste aktualisiert
 
 - [x] Produkt bearbeiten:
@@ -24,23 +24,23 @@
 
 ## Kategorien
 
-- [ ] Kategorie in Produktliste löschen: 
+- [x] Kategorie in Produktliste löschen: 
 	Kategorien und Produkte können nur in ihren jeweiligen Listen gelöscht oder bearbeitet werden
 
-- [ ] Kategorie speichern:
+- [x] Kategorie speichern:
 	Kategorie wird mit Name und Farbe in DB eingespeichert
 
 - [ ] Kein Kategoriename
 	Eingabeaufforderung für Kategoriename wird angezeigt
 
-- [ ] Kategorie entfernen:
+- [x] Kategorie entfernen:
 	Kategorie wird aus DB entfernt
 	
 - [ ] Produkte sind dieser Kategorie zugeordnet
 	Fenster mit Hinweis darauf das noch Produkte mit dieser Kategorie versehen sind
 	Kategorien müssen leer sein um sie löschen zu können
 	
-- [ ] Kategorie bearbeiten:
+- [x] Kategorie bearbeiten:
 	Nur Name und Farbe der Kategorie ist bearbeitbar
 
 - [ ] Farbe wird für Kategorie aktiviert:

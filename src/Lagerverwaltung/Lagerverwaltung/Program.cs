@@ -8,6 +8,7 @@ namespace Lagerverwaltung
     static class Program
     {
         public static BindingList<Produkt> ProduktListe = new BindingList<Produkt>();
+        public static BindingList<Kategorie> Kategorieliste = new BindingList<Kategorie>();
 
         /// <summary>
         /// The main entry point for the application.
