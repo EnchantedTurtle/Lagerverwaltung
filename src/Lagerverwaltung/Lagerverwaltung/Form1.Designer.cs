@@ -164,7 +164,6 @@
             this.listBox_Produkt.Name = "listBox_Produkt";
             this.listBox_Produkt.ScrollAlwaysVisible = true;
             this.listBox_Produkt.Size = new System.Drawing.Size(178, 212);
-            this.listBox_Produkt.Sorted = true;
             this.listBox_Produkt.TabIndex = 26;
             this.listBox_Produkt.SelectedIndexChanged += new System.EventHandler(this.listBox_Produkt_SelectedIndexChanged);
             // 
@@ -241,9 +240,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(44, 212);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(130, 13);
+            this.label6.Size = new System.Drawing.Size(127, 13);
             this.label6.TabIndex = 14;
-            this.label6.Text = "Kategorie des Produktes *";
+            this.label6.Text = "Category des Produktes *";
             // 
             // label5
             // 
@@ -291,7 +290,7 @@
             this.button1.TabIndex = 38;
             this.button1.Text = "Reinigen";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // textBox_KategorieName
             // 
@@ -338,7 +337,6 @@
             this.listBox_Kategorien.Name = "listBox_Kategorien";
             this.listBox_Kategorien.ScrollAlwaysVisible = true;
             this.listBox_Kategorien.Size = new System.Drawing.Size(120, 173);
-            this.listBox_Kategorien.Sorted = true;
             this.listBox_Kategorien.TabIndex = 30;
             this.listBox_Kategorien.SelectedIndexChanged += new System.EventHandler(this.listBox_Kategorien_SelectedIndexChanged);
             // 
@@ -361,9 +359,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(31, 103);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(108, 13);
+            this.label9.Size = new System.Drawing.Size(105, 13);
             this.label9.TabIndex = 10;
-            this.label9.Text = "Name der Kategorie *";
+            this.label9.Text = "Name der Category *";
             // 
             // button_KategorSave
             // 
@@ -400,33 +398,33 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage Produkte;
         private System.Windows.Forms.TabPage textBox_Kategorie;
-        private System.Windows.Forms.TextBox textBox_ProduktName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox_ProduktKategorien;
-        private System.Windows.Forms.NumericUpDown numericUpDown_ProduktAnzahl;
-        private System.Windows.Forms.Button button_ProduktEdit;
-        private System.Windows.Forms.Button button_ProduktDel;
-        private System.Windows.Forms.ListBox listBox_Produkt;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button_ProduktSave;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button_KategorSave;
-        private System.Windows.Forms.Button button_KategorEdit;
-        private System.Windows.Forms.Button button_KategorDel;
-        private System.Windows.Forms.ListBox listBox_Kategorien;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.TextBox textBox_ProduktDetails;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown numericUpDown_ProduktKosten;
-        private System.Windows.Forms.Button button_reinigen;
-        private System.Windows.Forms.TextBox textBox_KategorieName;
-        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.TextBox textBox_ProduktName;
+        public System.Windows.Forms.ComboBox comboBox_ProduktKategorien;
+        public System.Windows.Forms.NumericUpDown numericUpDown_ProduktAnzahl;
+        public System.Windows.Forms.Button button_ProduktEdit;
+        public System.Windows.Forms.Button button_ProduktDel;
+        public System.Windows.Forms.ListBox listBox_Produkt;
+        public System.Windows.Forms.Button button_ProduktSave;
+        public System.Windows.Forms.Button button_KategorSave;
+        public System.Windows.Forms.Button button_KategorEdit;
+        public System.Windows.Forms.Button button_KategorDel;
+        public System.Windows.Forms.ListBox listBox_Kategorien;
+        public System.Windows.Forms.TextBox textBox_ProduktDetails;
+        public System.Windows.Forms.NumericUpDown numericUpDown_ProduktKosten;
+        public System.Windows.Forms.Button button_reinigen;
+        public System.Windows.Forms.TextBox textBox_KategorieName;
+        public System.Windows.Forms.Button button1;
     }
 }
 

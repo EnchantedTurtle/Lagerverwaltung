@@ -2,12 +2,11 @@
 
 namespace Lagerverwaltung
 {
-    class Produkt
+    public class Produkt
     {
         public String Name { get; set; }
         public int Anzahl { get; set; }
         public int Kosten { get; set; }
-        public String Kategorie { get; set; }
         public String Details { get; set; }
         public String Id { get; set; }
 
@@ -21,16 +20,8 @@ namespace Lagerverwaltung
             this.Name = name;
             this.Anzahl = anzahl;
             this.Kosten = kosten;
-            this.Kategorie = kategorie;
             this.Details = details;
             this.Id = Guid.NewGuid().ToString();
         }
-
-        public override string ToString()
-        {
-            return this.Id;
-        }
     }
-
-
 }

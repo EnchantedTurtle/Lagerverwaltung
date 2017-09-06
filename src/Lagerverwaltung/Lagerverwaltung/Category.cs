@@ -1,21 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lagerverwaltung
 {
-    class Kategorie
+    public class Category
     {
         public String Name { get; set; }
         public String Id { get; set; }
+        public List<Produkt> Products { get; set; } = new List<Produkt>();
 
-        public Kategorie(String name)
+        public Category(String name)
         {
             this.Name = name;
             this.Id = Guid.NewGuid().ToString();
-        }
-
-        public override string ToString()
-        {
-            return this.Id;
         }
     }
 }

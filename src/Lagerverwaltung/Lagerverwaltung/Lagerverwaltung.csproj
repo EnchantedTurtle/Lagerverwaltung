@@ -46,13 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datenbank.cs" />
+    <Compile Include="Datenlisten.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kategorie.cs" />
+    <Compile Include="IDatenverwaltung.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="Produkt.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

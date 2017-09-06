@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace Lagerverwaltung
@@ -16,220 +16,131 @@ namespace Lagerverwaltung
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            listBox_Produkt.DisplayMember = "Name";
-            listBox_Kategorien.DisplayMember = "Name";
-            comboBox_ProduktKategorien.DisplayMember = "Name";
-
-            listBox_Produkt.ValueMember = " Id";
-            listBox_Kategorien.ValueMember = "Id";
-            comboBox_ProduktKategorien.ValueMember = "Id";
-
         }
-        
 
+        /*
+         * 
+          TODO Produkte bearbeitbar machen
+          (TODO Kategorien sortieren)
+        */
         private void button_ProduktSave_Click(object sender, EventArgs e)
         {
-            bool isUsed = false;
-
-            if (TestForEmptyProd())
+            if (ValidateProduct(textBox_ProduktName.Text))
             {
-                Produkt produkt = new Produkt(textBox_ProduktName.Text,
+                    Produkt produkt = new Produkt(textBox_ProduktName.Text,
                     Convert.ToInt32(numericUpDown_ProduktAnzahl.Value),
                     Convert.ToInt32(numericUpDown_ProduktKosten.Value), comboBox_ProduktKategorien.GetItemText(comboBox_ProduktKategorien.SelectedItem),
                     textBox_ProduktDetails.Text);
 
-                foreach (Produkt prod in Program.Produkte)
-                {
-                    if (prod.Name.Equals(produkt.Name))
-                    {
-                        MessageBox.Show("Dieser Name wird bereits benutzt");
-                        isUsed = true;
-                    }
-                }
-                if (!isUsed)
-                {
-                    Program.Produkte.Add(produkt);
-                    listBox_Produkt.DataSource = Program.Produkte;
+                    Program.Daten.CreateProdukt(produkt, comboBox_ProduktKategorien.SelectedValue.ToString());
+                    RefreshView();
                     ClearInputProd();
-                }
             }
         }
 
-        private void button_ProduktDel_Click(object sender, EventArgs e)
+        private void button_ProduktDel_Click(object sender, EventArgs e) 
         {
-
-            String selectedProductName = listBox_Produkt.GetItemText(listBox_Produkt.SelectedItem);
-
-            for (var i = 0; i < Program.Produkte.Count; i++)
-            {
-                Produkt produkt = Program.Produkte[i];
-
-
-                if (selectedProductName.Equals(produkt.Name))
-                {
-                    Program.Produkte.Remove(Program.Produkte[i]);
-                }
-            }
-            
+            Program.Daten.DeleteProdukt(listBox_Produkt.SelectedValue.ToString());
+            RefreshView();
         }
 
         private void button_ProduktEdit_Click(object sender, EventArgs e)
         {
-            for (var i = 0; i < Program.Produkte.Count; i++)
+
+                Produkt produkt = (Produkt) listBox_Produkt.SelectedItem;
+
+                Program.Daten.UpdateProdukt(produkt,textBox_ProduktName.Text, textBox_ProduktDetails.Text, numericUpDown_ProduktKosten.Value.ToString(), numericUpDown_ProduktAnzahl.Value.ToString());
+                RefreshView();
+            
+        }
+
+        private void listBox_Produkt_SelectedIndexChanged(object sender, EventArgs e) 
+        {
+            List<Produkt> products = Program.Daten.ReadProdukt();
+            List<Category> categories = Program.Daten.ReadCategory();
+
+            for (var i = 0; i < products.Count; i++)
             {
-                Produkt produkt = Program.Produkte[i];
+                Produkt produkt = products[i];
 
-                if(listBox_Produkt.SelectedValue.ToString().Equals(produkt.Id))
-                 {
-                    produkt.Name = textBox_ProduktName.Text;
-                    produkt.Kosten = Convert.ToInt32(numericUpDown_ProduktKosten.Value);
-                    produkt.Details = textBox_ProduktDetails.Text;
-                    produkt.Kategorie = comboBox_ProduktKategorien.GetItemText(comboBox_ProduktKategorien.SelectedItem);
-                    produkt.Anzahl = Convert.ToInt32(numericUpDown_ProduktAnzahl.Value);
-
-                    Program.Produkte.Remove(produkt);
-                    Program.Produkte.Add(produkt);
-                }
-            }
-        }
-
-        private void ClearInputProd()
-        {
-            textBox_ProduktName.Text = "";
-            numericUpDown_ProduktKosten.Value = 0;
-            textBox_ProduktDetails.Text = "";
-            comboBox_ProduktKategorien.SelectedText = "";
-            numericUpDown_ProduktAnzahl.Value = 0;
-        }
-
-        private void ClearInputKat()
-        {
-            textBox_KategorieName.Text = "";
-        }
-
-        private void listBox_Produkt_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            for (var i = 0; i < Program.Produkte.Count; i++)
-            {
-                Produkt produkt = Program.Produkte[i];
-
-                String proName = listBox_Produkt.GetItemText(listBox_Produkt.SelectedItem);
-
-                if (proName.Equals(produkt.Name))
+                if (listBox_Produkt.SelectedValue != null)
                 {
-                    textBox_ProduktName.Text = produkt.Name;
-                    numericUpDown_ProduktKosten.Text = produkt.Kosten.ToString();
-                    textBox_ProduktDetails.Text = produkt.Details;
-                    comboBox_ProduktKategorien.Text = produkt.Kategorie;
-                    numericUpDown_ProduktAnzahl.Text = produkt.Anzahl.ToString();
+                    String proId = listBox_Produkt.SelectedValue.ToString();
+
+                    if (proId.Equals(produkt.Id))
+                    {      
+                        textBox_ProduktName.Text = produkt.Name;
+                        numericUpDown_ProduktKosten.Text = produkt.Kosten.ToString();
+                        textBox_ProduktDetails.Text = produkt.Details;
+                        numericUpDown_ProduktAnzahl.Text = produkt.Anzahl.ToString();
+
+                        for (var j = 0; j < categories.Count; j++)
+                        {
+
+                            if (categories[j].Products.Contains(produkt))
+                            {
+                                comboBox_ProduktKategorien.Text = categories[j].Name;
+                            }   
+                        }
+                    }
                 }
             }
-        }
-
-        private void button_reinigen_Click(object sender, EventArgs e)
-        {
-            ClearInputProd();
-            textBox_ProduktName.BackColor = Color.White;
         }
 
         private void button_KategorSave_Click(object sender, EventArgs e)
         {
-            bool isUsed = false;
-
-            if (TestForEmptyKat())
+            if (ValidateCategory(textBox_KategorieName.Text))
             {
-
-                foreach (Kategorie kat in Program.Kategorien)
-                {
-                    if (kat.Name.Equals(textBox_KategorieName.Text))
-                    {
-                        MessageBox.Show("Dieser Name wird bereits genutzt");
-                        isUsed = true;
-                    }
-                }
-                if (!isUsed)
-                {
-
-                    Kategorie kategorie = new Kategorie(textBox_KategorieName.Text);
-                    Program.Kategorien.Add(kategorie);
-                    listBox_Kategorien.DataSource = Program.Kategorien;
-                    comboBox_ProduktKategorien.DataSource = Program.Kategorien;
-                    ClearInputKat();
-                }
-
+                Category category = new Category(textBox_KategorieName.Text);
+                Program.Daten.CreateCategory(category);
+                RefreshView();
+                ClearInputKat();
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ClearInputKat();
         }
 
         private void button_KategorDel_Click(object sender, EventArgs e)
         {
-            String selectedKategorieName = listBox_Kategorien.GetItemText(listBox_Kategorien.SelectedItem);
+            string selectedCategoryName = listBox_Kategorien.GetItemText(listBox_Kategorien.SelectedItem);
 
-
-
-            for (var i = 0; i < Program.Produkte.Count; i++)
+            if (listBox_Kategorien.SelectedValue != null)
             {
-                var product = Program.Produkte[i];
-                if (product.Kategorie.Equals(selectedKategorieName))
-                {
-                    MessageBox.Show("Es sind Produkte dieser Kategorie zugeordnet");
-                    return;
-                }
-            }
+                string selectedCategoryId = listBox_Kategorien.SelectedValue.ToString();
 
-
-            for (var i = 0; i < Program.Kategorien.Count; i++)
-            {
-                Kategorie kategorie = Program.Kategorien[i];
-               
-                    if (selectedKategorieName.Equals(kategorie.Name))
-                    {
-                        Program.Kategorien.Remove(Program.Kategorien[i]);
-                        return;
-                    }
-                
-            }
-
-
+                Program.Daten.DeleteCategory(selectedCategoryName, selectedCategoryId);
+                RefreshView();
+            }    
         }
 
         private void button_KategorEdit_Click(object sender, EventArgs e)
         {
-            for (var i = 0; i < Program.Kategorien.Count; i++)
-            {
-                Kategorie kategorie = Program.Kategorien[i];
-
-                if (listBox_Kategorien.SelectedValue.ToString().Equals(kategorie.Id))
-                {
-                    kategorie.Name = textBox_KategorieName.Text;
-
-                    Program.Kategorien.Remove(kategorie);
-                    Program.Kategorien.Add(kategorie);
-                }
-            }
+                Category category = (Category) listBox_Kategorien.SelectedItem;
+                
+                Program.Daten.UpdateCategory(category, textBox_KategorieName.Text);
+                RefreshView();
+            
         }
 
         private void listBox_Kategorien_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (var i = 0; i < Program.Kategorien.Count; i++)
+            List<Category> categories = Program.Daten.ReadCategory();
+
+            for (var i = 0; i < categories.Count; i++)
             {
-                Kategorie kategorie = Program.Kategorien[i];
+                Category category = categories[i];
 
-                String katname = listBox_Kategorien.GetItemText(listBox_Kategorien.SelectedItem);
-
-                if (katname.Equals(kategorie.Name))
+                if (listBox_Kategorien.SelectedValue != null)
                 {
-                    textBox_KategorieName.Text = kategorie.Name;
+                    String katId = listBox_Kategorien.SelectedValue.ToString();
+
+                    if (katId.Equals(category.Id))
+                    {
+                        textBox_KategorieName.Text = category.Name;
+                    }
                 }
             }
         }
 
-        public bool TestForEmptyProd()
+        public bool ValidateProduct(string productName)
         {
             if (String.IsNullOrWhiteSpace(textBox_ProduktName.Text))
             {
@@ -251,18 +162,95 @@ namespace Lagerverwaltung
                 MessageBox.Show("Die Anzahl darf nicht kostenlos sein");
                 return false;
             }
+
+            // Validieren ob Produktname bereits verewendet wird
+            foreach (Produkt prod in Program.Daten.ReadProdukt())
+            {
+                if (prod.Name.Equals(productName))
+                {
+                    MessageBox.Show("Dieser Name wird bereits benutzt");
+                    return false;
+                }
+            }
+
             return true;
         }
 
-        public bool TestForEmptyKat()
+        public bool ValidateCategory(string categoryName)
         {
             if (String.IsNullOrWhiteSpace(textBox_KategorieName.Text))
             {
                 MessageBox.Show("Der Kategoriename darf nicht leer sein");
                 return false;
             }
-                return true;
+
+            foreach (Category kat in Program.Daten.ReadCategory())
+            {
+                if (kat.Name.Equals(textBox_KategorieName.Text))
+                {
+                    MessageBox.Show("Dieser Name wird bereits genutzt");
+                    return false;
+                }
+            }
+            return true;
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            textBox_KategorieName.Text = "";
+            listBox_Kategorien.ClearSelected();
+        }
+
+
+        public void ClearInputProd()
+        {
+            textBox_ProduktName.Text = "";
+            numericUpDown_ProduktKosten.Value = 0;
+            textBox_ProduktDetails.Text = "";
+            comboBox_ProduktKategorien.SelectedText = "";
+            numericUpDown_ProduktAnzahl.Value = 0;
+            listBox_Produkt.ClearSelected();
+            comboBox_ProduktKategorien.SelectedIndex = 0;
+        }
+
+        public void ClearInputKat()
+        {
+            textBox_KategorieName.Text = "";
+            listBox_Kategorien.ClearSelected();
+        }
+
+        private void button_reinigen_Click(object sender, EventArgs e)
+        {
+            textBox_ProduktName.Text = "";
+            numericUpDown_ProduktKosten.Value = 0;
+            textBox_ProduktDetails.Text = "";
+            comboBox_ProduktKategorien.SelectedText = "";
+            numericUpDown_ProduktAnzahl.Value = 0;
+            listBox_Produkt.ClearSelected();
+            comboBox_ProduktKategorien.SelectedIndex = -1;
+        }
+
+        private void RefreshView()
+        {
+            List<Produkt> products = Program.Daten.ReadProdukt();
+            List<Category> categories = Program.Daten.ReadCategory();
+
+            listBox_Produkt.DataSource = null;
+            listBox_Kategorien.DataSource = null;
+            comboBox_ProduktKategorien.DataSource = null;
+
+            listBox_Produkt.DisplayMember = "Name";
+            listBox_Kategorien.DisplayMember = "Name";
+            comboBox_ProduktKategorien.DisplayMember = "Name";
+
+            listBox_Produkt.ValueMember = "Id";
+            listBox_Kategorien.ValueMember = "Id";
+            comboBox_ProduktKategorien.ValueMember = "Id";
+
+            listBox_Produkt.DataSource = products;
+            listBox_Kategorien.DataSource = categories;
+            comboBox_ProduktKategorien.DataSource = categories;
+        }
     }
 }
+
