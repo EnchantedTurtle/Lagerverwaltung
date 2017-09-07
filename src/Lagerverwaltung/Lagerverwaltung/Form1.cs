@@ -46,11 +46,19 @@ namespace Lagerverwaltung
 
         private void button_ProduktEdit_Click(object sender, EventArgs e)
         {
-                Produkt updateProduct = new Produkt(textBox_ProduktName.Text, Convert.ToInt32(numericUpDown_ProduktAnzahl.Value), Convert.ToInt32(numericUpDown_ProduktKosten.Value), textBox_ProduktDetails.Text);
-                updateProduct.Id = listBox_Produkt.SelectedValue.ToString();
+                Produkt updateProduct = new Produkt(
 
-                Program.Daten.UpdateProdukt(updateProduct);
-                RefreshView();
+                    textBox_ProduktName.Text,
+                    Convert.ToInt32(numericUpDown_ProduktAnzahl.Value),
+                    Convert.ToInt32(numericUpDown_ProduktKosten.Value), 
+                    textBox_ProduktDetails.Text);
+
+                    updateProduct.Id = listBox_Produkt.SelectedValue.ToString();
+
+                    updateProduct.CategoryId = ((Category) comboBox_ProduktKategorien.SelectedValue).CategoryId;
+
+                    Program.Daten.UpdateProdukt(updateProduct);
+                    RefreshView();
             
         }
 
@@ -113,7 +121,8 @@ namespace Lagerverwaltung
         private void button_KategorEdit_Click(object sender, EventArgs e)
         {
                 Category updateCatgeory = new Category(textBox_KategorieName.Text);
-                updateCatgeory.CategoryId = listBox_Kategorien.SelectedValue.ToString();
+
+                updateCatgeory.CategoryId = ((Category)listBox_Kategorien.SelectedValue).CategoryId;
 
                 Program.Daten.UpdateCategory(updateCatgeory);
                 RefreshView();
@@ -130,7 +139,7 @@ namespace Lagerverwaltung
 
                 if (listBox_Kategorien.SelectedValue != null)
                 {
-                    String katId = listBox_Kategorien.SelectedValue.ToString();
+                    String katId = ((Category)listBox_Kategorien.SelectedValue).CategoryId;
 
                     if (katId.Equals(category.CategoryId))
                     {

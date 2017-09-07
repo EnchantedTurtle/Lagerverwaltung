@@ -1,2 +1,2 @@
-UpdateProdukt ID wird nicht richtig übergeben
-UpdateKategorie kategorien nicht bearbeitbar
+UpdateProdukt ID wird nicht richtig übergeben //solved
+UpdateKategorie kategorien nicht bearbeitbar //solved

@@ -34,7 +34,7 @@ namespace Lagerverwaltung
 
                 if (foundProduct != null)
                 {
-                    db.Products.Remove(foundProduct); //nul abfrage
+                    db.Products.Remove(foundProduct);
                     db.SaveChanges();
                 }
             }
