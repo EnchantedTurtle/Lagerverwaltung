@@ -16,23 +16,23 @@ namespace Lagerverwaltung
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Program.Daten.ReadCategory();
+            Program.Daten.ReadProdukt();
+            RefreshView();
         }
 
-        /*
-         * 
-          TODO Produkte bearbeitbar machen
-          (TODO Kategorien sortieren)
-        */
         private void button_ProduktSave_Click(object sender, EventArgs e)
         {
             if (ValidateProduct(textBox_ProduktName.Text))
             {
                     Produkt produkt = new Produkt(textBox_ProduktName.Text,
                     Convert.ToInt32(numericUpDown_ProduktAnzahl.Value),
-                    Convert.ToInt32(numericUpDown_ProduktKosten.Value), comboBox_ProduktKategorien.GetItemText(comboBox_ProduktKategorien.SelectedItem),
+                    Convert.ToInt32(numericUpDown_ProduktKosten.Value),
                     textBox_ProduktDetails.Text);
 
-                    Program.Daten.CreateProdukt(produkt, comboBox_ProduktKategorien.SelectedValue.ToString());
+                    Category selectedCategory = (Category)comboBox_ProduktKategorien.SelectedValue;
+
+                    Program.Daten.CreateProdukt(produkt, selectedCategory.CategoryId);
                     RefreshView();
                     ClearInputProd();
             }
@@ -46,10 +46,10 @@ namespace Lagerverwaltung
 
         private void button_ProduktEdit_Click(object sender, EventArgs e)
         {
+                Produkt updateProduct = new Produkt(textBox_ProduktName.Text, Convert.ToInt32(numericUpDown_ProduktAnzahl.Value), Convert.ToInt32(numericUpDown_ProduktKosten.Value), textBox_ProduktDetails.Text);
+                updateProduct.Id = listBox_Produkt.SelectedValue.ToString();
 
-                Produkt produkt = (Produkt) listBox_Produkt.SelectedItem;
-
-                Program.Daten.UpdateProdukt(produkt,textBox_ProduktName.Text, textBox_ProduktDetails.Text, numericUpDown_ProduktKosten.Value.ToString(), numericUpDown_ProduktAnzahl.Value.ToString());
+                Program.Daten.UpdateProdukt(updateProduct);
                 RefreshView();
             
         }
@@ -100,22 +100,22 @@ namespace Lagerverwaltung
 
         private void button_KategorDel_Click(object sender, EventArgs e)
         {
-            string selectedCategoryName = listBox_Kategorien.GetItemText(listBox_Kategorien.SelectedItem);
-
             if (listBox_Kategorien.SelectedValue != null)
             {
-                string selectedCategoryId = listBox_Kategorien.SelectedValue.ToString();
-
-                Program.Daten.DeleteCategory(selectedCategoryName, selectedCategoryId);
+                Category selectedCategory = (Category) listBox_Kategorien.SelectedValue;
+                
+                Program.Daten.DeleteCategory(selectedCategory.CategoryId);
                 RefreshView();
+                ClearInputProd();
             }    
         }
 
         private void button_KategorEdit_Click(object sender, EventArgs e)
         {
-                Category category = (Category) listBox_Kategorien.SelectedItem;
-                
-                Program.Daten.UpdateCategory(category, textBox_KategorieName.Text);
+                Category updateCatgeory = new Category(textBox_KategorieName.Text);
+                updateCatgeory.CategoryId = listBox_Kategorien.SelectedValue.ToString();
+
+                Program.Daten.UpdateCategory(updateCatgeory);
                 RefreshView();
             
         }
@@ -132,7 +132,7 @@ namespace Lagerverwaltung
                 {
                     String katId = listBox_Kategorien.SelectedValue.ToString();
 
-                    if (katId.Equals(category.Id))
+                    if (katId.Equals(category.CategoryId))
                     {
                         textBox_KategorieName.Text = category.Name;
                     }
@@ -209,8 +209,8 @@ namespace Lagerverwaltung
             textBox_ProduktDetails.Text = "";
             comboBox_ProduktKategorien.SelectedText = "";
             numericUpDown_ProduktAnzahl.Value = 0;
-            listBox_Produkt.ClearSelected();
-            comboBox_ProduktKategorien.SelectedIndex = 0;
+            listBox_Produkt.ClearSelected();       
+            comboBox_ProduktKategorien.SelectedIndex = -1;
         }
 
         public void ClearInputKat()

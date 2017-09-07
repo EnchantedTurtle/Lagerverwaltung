@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Lagerverwaltung
 {
@@ -9,13 +10,17 @@ namespace Lagerverwaltung
         public int Kosten { get; set; }
         public String Details { get; set; }
         public String Id { get; set; }
-
+        public String CategoryId { get; set; }
+        /*
+        [ForeignKey("Category")]
+        public virtual Category Category { get; set; }
+        */
         public Produkt()
         {
             
         }
 
-        public Produkt(String name, int anzahl, int kosten, String kategorie, String details)
+        public Produkt(String name, int anzahl, int kosten, String details)
         {
             this.Name = name;
             this.Anzahl = anzahl;

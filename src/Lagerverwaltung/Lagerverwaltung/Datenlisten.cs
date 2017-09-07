@@ -16,7 +16,7 @@ namespace Lagerverwaltung
         {
             for (var i = 0; i < MainCategories.Count; i++)
             {
-                if (MainCategories[i].Id == categoryId)
+                if (MainCategories[i].CategoryId == categoryId)
                 {
                     MainCategories[i].Products.Add(product);
                     return;
@@ -32,14 +32,14 @@ namespace Lagerverwaltung
             {
                 for (var j = 0; j < MainCategories[i].Products.Count; j++)
                 {
-                    products.Add(MainCategories[i].Products[j]);
+                   products.Add(MainCategories[i].Products[j]);
 
                 }
             }
             return products;
         }
 
-        public void UpdateProdukt(Produkt produkt, string newName, string newDetails, string newKosten, string newAnzahl) //Testing 
+        public void UpdateProdukt(Produkt produkt) //Testing 
         {
             for (var i = 0; i < MainCategories.Count; i++)
             {
@@ -48,13 +48,7 @@ namespace Lagerverwaltung
                     if (MainCategories[i].Products[j].Id == produkt.Id)
                     {
                         MainCategories[i].Products.Remove(MainCategories[i].Products[j]);
-
-                        produkt.Name = newName;
-                        produkt.Details = newDetails;
-                        produkt.Kosten = Convert.ToInt32(newKosten);
-                        produkt.Anzahl = Convert.ToInt32(newAnzahl);
-
-
+                        
                         MainCategories[i].Products.Add(produkt);
                         return;
                     }
@@ -87,25 +81,24 @@ namespace Lagerverwaltung
             return MainCategories;
         }
 
-        public void UpdateCategory(Category category, string newName) //Done
+        public void UpdateCategory(Category category) //Done
         {
             for (var i = 0; i < MainCategories.Count; i++)
             {
-                if (MainCategories[i].Id.Equals(category.Id))
+                if (MainCategories[i].CategoryId.Equals(category.CategoryId))
                 {
                     MainCategories.Remove(MainCategories[i]);
-                    category.Name = newName;
                     MainCategories.Insert(i,category);
                     return;
                 }
             }
         }
 
-        public void DeleteCategory(string catName, string catId) //Done
+        public void DeleteCategory(string catId) //Done
         {
             for (var i = 0; i < MainCategories.Count; i++)
             {
-                if (MainCategories[i].Id == catId)
+                if (MainCategories[i].CategoryId == catId)
                 {
                     if (MainCategories[i].Products.Count > 0)
                     {
@@ -117,28 +110,5 @@ namespace Lagerverwaltung
                 }
             }
         }
-        /*
-private Produkt GetProduct(string id)
-{
-    List<Produkt> products = Program.Daten.ReadProdukt();
-
-    for (var i = 0; i < products.Count; i++)
-    {
-        Produkt produkt = products[i];
-
-        if (listBox_Produkt.SelectedValue != null)
-        {
-            String proId = listBox_Produkt.SelectedValue.ToString();
-
-            if (proId.Equals(id))
-            {
-                // var p = Daten.GetProduct(id);
-                return produkt;
-            }
-        }   
-    }
-    return null;
-}
-*/
     }
 }

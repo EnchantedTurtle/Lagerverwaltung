@@ -6,13 +6,13 @@ namespace Lagerverwaltung
     {
         void CreateProdukt(Produkt produkt, string categoryId);
         List<Produkt> ReadProdukt();
-        void UpdateProdukt(Produkt produkt, string newName, string newDetails, string newKosten, string newAnzahl);
+        void UpdateProdukt(Produkt produkt);
         void DeleteProdukt(string id);
 
         void CreateCategory(Category category);
         List<Category> ReadCategory();
-        void UpdateCategory(Category category, string newName);
-        void DeleteCategory(string catName, string catId);
+        void UpdateCategory(Category category);
+        void DeleteCategory(string catId);
         //CRUD
     }
 }

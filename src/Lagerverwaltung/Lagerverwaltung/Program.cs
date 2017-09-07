@@ -9,7 +9,7 @@ namespace Lagerverwaltung
 //        public static BindingList<Produkt> Produkte = new BindingList<Produkt>();
 //        public static BindingList<Category> Kategorien = new BindingList<Category>();
 
-        public static IDatenverwaltung Daten = new Datenlisten();
+        public static IDatenverwaltung Daten = new Datenbank();
 
         /// <summary>
         /// The main entry point for the application.
